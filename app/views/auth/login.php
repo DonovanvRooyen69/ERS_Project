@@ -16,7 +16,8 @@ if (session_status() == PHP_SESSION_NONE) {
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/css/bootstrap-icons.min.css">
     <link rel="stylesheet" href="/css/style.css">
-    <link rel="icon" href="/images/ers_logo2.png" type="image/x-icon"> </head>
+    <link rel="icon" href="/images/icon.png" type="image/x-icon">
+</head>
 <body>
 
     <div class="login-wrapper d-flex align-items-center justify-content-center min-vh-100 p-3">

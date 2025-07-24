@@ -62,7 +62,7 @@ $username = $_SESSION['username'] ?? 'User';
         <h5 class="fw-bold mb-4">Quick Links</h5>
         <ul class="nav flex-column">
             <li class="nav-item">
-                <a class="nav-link" href="#"><i class="bi bi-house-door me-2"></i>Home</a>
+                <a class="nav-link" href="/dashboard"><i class="bi bi-house-door me-2"></i>Home</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link d-flex justify-content-between align-items-center" data-bs-toggle="collapse" href="#attendanceSubmenu" role="button" aria-expanded="false" aria-controls="attendanceSubmenu">
@@ -80,7 +80,7 @@ $username = $_SESSION['username'] ?? 'User';
                                 <li class="small"><a class="nav-link" href="#" onclick="loadContent('/employee-timesheet')"><i class="bi bi-file-earmark-text-fill me-1"></i>Employee Timesheet</a></li>
                                 <li class="small"><a class="nav-link" href="#" onclick="loadContent('')"><i class="bi bi-file-earmark-text-fill me-1"></i>Fill Up Report</a></li>
                                 <li class="small"><a class="nav-link" href="#" onclick="loadContent('')"><i class="bi bi-file-earmark-text-fill me-1"></i>Shift Allocation Report</a></li>
-                                <li class="small"><a class="nav-link" href="#" onclick="loadContent('')"><i class="bi bi-file-earmark-text-fill me-1"></i>Employee Timesheet</a></li>
+                                <li class="small"><a class="nav-link" href="#" onclick="loadContent('')"><i class="bi bi-file-earmark-text-fill me-1"></i>Scheduling Report</a></li>
                             </ul>
                         </li>
 
@@ -299,6 +299,7 @@ $username = $_SESSION['username'] ?? 'User';
 
 
     function loadContent(url){
+
         fetch(url, {
             method: 'GET',
             credentials: 'include',
@@ -342,6 +343,14 @@ $username = $_SESSION['username'] ?? 'User';
             taIcon.classList.remove('bi', 'bi-archive');
             taIcon.classList.add('bi', 'bi-archive-fill');
         });
+
+        let elements = document.querySelectorAll('#sidebar .nav-link')
+
+        elements.forEach(el => {
+            el.addEventListener('click', () => {
+                elements.forEach(el => el.classList.remove('active'))
+                el.classList.add('active')
+            })})
 
         document.querySelectorAll('#sidebar .nav-link').forEach(link =>{
             const href = link.getAttribute('href');

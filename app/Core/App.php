@@ -6,7 +6,7 @@ use App\Controllers\AuthController;
 use App\Controllers\DashboardController;
 
 class App {
-    protected $controller; // Will hold the controller instance
+    protected $controller;
     protected $method;
     protected $params = [];
 
@@ -19,7 +19,7 @@ class App {
         $requestMethod = $_SERVER['REQUEST_METHOD'];
 
         if (empty($url)) {
-            $this->controller = new AuthController(); // Instantiate directly for known default
+            $this->controller = new AuthController();
             $this->method = 'showLoginForm';
         }
         // Handle /dashboard route
@@ -32,94 +32,83 @@ class App {
                 exit();
             }
         }
-        // Handle /logout route
         elseif ($url[0] === 'logout') {
-            $this->controller = new AuthController(); // Instantiate directly
+            $this->controller = new AuthController();
             $this->method = 'logout';
-            unset($url[0]); // Consume 'logout' segment
-        }
-        // Handle /login route (GET or POST)
-        elseif ($url[0] === 'login') {
-            $this->controller = new AuthController(); // Instantiate directly
-
-            if ($requestMethod === 'POST') {
-                $this->method = 'login'; // Process login
-            } else { // It's a GET request
-                $this->method = 'showLoginForm'; // Show login form
-            }
-            unset($url[0]); // Consume 'login' segment
+            unset($url[0]);
         }
         elseif ($url[0] === 'login') {
-            $this->controller = new AuthController(); // Instantiate directly
+            $this->controller = new AuthController();
 
             if ($requestMethod === 'POST') {
-                $this->method = 'login'; // Process login
-            } else { // It's a GET request
-                $this->method = 'showLoginForm'; // Show login form
+                $this->method = 'login';
+            } else {
+                $this->method = 'showLoginForm';
             }
-            unset($url[0]); // Consume 'login' segment
+            unset($url[0]);
         }
-        // --- NEW: Handle /employee-timesheet route for AJAX content loading ---
+        elseif ($url[0] === 'login') {
+            $this->controller = new AuthController();
+
+            if ($requestMethod === 'POST') {
+                $this->method = 'login';
+            } else {
+                $this->method = 'showLoginForm';
+            }
+            unset($url[0]);
+        }
         elseif ($url[0] === 'employee-timesheet') {
             $this->controller = new DashboardController();
             $this->method = 'showEmployeeTimesheet';
             unset($url[0]);
         }
         elseif ($url[0] === 'list-employee') {
-            if (!isset($_SESSION['user_id'])) { // IMPORTANT: Add AUTHENTICATION CHECK here!
-                http_response_code(401);
-                echo '<div class="alert alert-danger">Unauthorized. Please log in.</div>';
-                exit(); // Stop execution
-            }
-            $this->controller = new DashboardController(); // Or a new `EmployeeController` if you have one
-            $this->method = 'showListEmployee'; // A new method in DashboardController
-            unset($url[0]);
-        }
-        elseif ($url[0] === 'newEmployee') { // Match the URL you're requesting
-            if (!isset($_SESSION['user_id'])) { // AUTHENTICATION CHECK
+            if (!isset($_SESSION['user_id'])) {
                 http_response_code(401);
                 echo '<div class="alert alert-danger">Unauthorized. Please log in.</div>';
                 exit();
             }
             $this->controller = new DashboardController();
-            $this->method = 'showNewEmployee'; // This method will be added to DashboardController
+            $this->method = 'showListEmployee';
             unset($url[0]);
         }
-        // Default dynamic controller/method resolution (for other routes)
+        elseif ($url[0] === 'newEmployee') {
+            if (!isset($_SESSION['user_id'])) {
+                http_response_code(401);
+                echo '<div class="alert alert-danger">Unauthorized. Please log in.</div>';
+                exit();
+            }
+            $this->controller = new DashboardController();
+            $this->method = 'showNewEmployee';
+            unset($url[0]);
+        }
         else {
             $controllerName = ucfirst($url[0]) . 'Controller';
             $controllerFilePath = __DIR__ . '/../controllers/' . $controllerName . '.php';
 
             if (file_exists($controllerFilePath)) {
-                $this->controller = 'App\\Controllers\\' . $controllerName; // Store full class string
+                $this->controller = 'App\\Controllers\\' . $controllerName;
                 unset($url[0]);
             } else {
-                $this->controller = 'App\\Controllers\\AuthController'; // Fallback to string name
+                $this->controller = 'App\\Controllers\\AuthController';
                 $this->method = 'showLoginForm';
             }
 
-            // Instantiate here for dynamic routes
-            if (is_string($this->controller)) { // If it's still a string (class name), instantiate it
-                $controllerClass = $this->controller; // Already full namespace
+            if (is_string($this->controller)) {
+                $controllerClass = $this->controller;
                 $this->controller = new $controllerClass();
             }
 
-            // Determine method for dynamic routes
             if (isset($url[1]) && method_exists($this->controller, $url[1])) {
                 $this->method = $url[1];
 
                 unset($url[1]);
             } else {
-                error_log("Routing: Method not found for controller " . get_class($this->controller) . ". Using default method for this controller or showLoginForm.");
-                // Fallback to a default method on the controller, or further re-route if desired
-                // For now, if no method, current method (showLoginForm from fallback) remains
+                echo ("Routing: Method not found for controller " . get_class($this->controller) . ". Using default method for this controller or showLoginForm.");
             }
         }
-
-        // Params will be whatever is left in $url
         $this->params = $url ? array_values($url) : [];
 
-        // This log now confirms the final state before run() attempts to call it
     }
 
     public function run() {

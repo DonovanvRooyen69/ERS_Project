@@ -11,7 +11,6 @@ class DashboardController
     }
     public function showEmployeeTimesheet()
     {
-        error_log("Attempting to load employeeTimesheet content via DashboardController.");
         require_once __DIR__ . '/../views/employeeTimesheet.php';
         exit();
     }

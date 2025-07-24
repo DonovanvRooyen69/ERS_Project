@@ -201,11 +201,10 @@ body {
 .nav-link.active {
     background-color: #e9f2ff;
     border-radius: 0.375rem;
-    font-weight: bold;
 }
 
 .nav-link.active i{
-    color: #0d6efd;
+    color: white;
 }
 
 .rotate-icon {
@@ -243,7 +242,15 @@ body {
     border-radius: 0.25rem;
 }
 
+#sidebar .nav-link.active:hover{
+    color: white;
+}
+
 #sidebar .nav-link.active i,
 #sidebar .nav-link.active-child i {
     color: #0d6efd;
+}
+
+#sidebar .nav-link.active i:hover{
+    color: white;
 }

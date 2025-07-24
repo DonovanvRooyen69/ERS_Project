@@ -7,58 +7,6 @@
 <hr>
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-4 col-12 mb-4 mb-md-0">
-            <div class="card shadow-sm">
-                <div class="card-body">
-                    <h5 class="card-title mb-3 text-primary fw-bold" style="letter-spacing:0.5px">ADDITIONAL OPTIONS</h5>
-                    <div class="mb-3">
-                        <label class="form-label fw-semibold small">Fill-up Rule</label>
-                        <select class="form-select form-select-sm">
-                            <option>Daily Operations</option>
-                            <option>Alternate Rule</option>
-                        </select>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label fw-semibold small">Ignore Days</label>
-                        <select class="form-select form-select-sm" multiple style="height:80px;">
-                            <option>Mon</option>
-                            <option>Tue</option>
-                            <option>Wed</option>
-                            <option>Thu</option>
-                            <option>Fri</option>
-                            <option>Sat</option>
-                            <option>Sun</option>
-                        </select>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label fw-semibold small">Time Types</label>
-                        <select class="form-select form-select-sm" multiple style="height:80px;">
-                            <option>Hours Worked</option>
-                            <option>Leave Overtime</option>
-                            <option>Leave Unpaid</option>
-                        </select>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label fw-semibold small">Report Fields</label>
-                        <select class="form-select form-select-sm" multiple style="height:80px;">
-                            <option>Shift Starts</option>
-                            <option>T&A In</option>
-                            <option>Act In</option>
-                        </select>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label fw-semibold small">Extra Fields</label>
-                        <select class="form-select form-select-sm" multiple style="height:80px;">
-                            <option>Gender</option>
-                            <option>Badge number</option>
-                            <option>Job Code</option>
-                        </select>
-                    </div>
-                    <button class="btn btn-primary w-100 fw-bold">Generate Report</button>
-                </div>
-            </div>
-        </div>
-
         <div class="col-md-8 col-12">
             <div class="card p-4">
                 <div>
@@ -68,7 +16,7 @@
                         <button class="btn btn-outline-secondary" type="button">Search</button>
                     </div>
                     <div class="table-responsive">
-                        <table class="table table-bordered table-sm align-middle">
+                        <table class="table table-bordered table-hover table-sm align-middle">
                             <thead class="table-light">
                             <tr>
                                 <th style="width:35px;"><input type="checkbox" id="selectAllEmployees"></th>
@@ -86,6 +34,21 @@
                                 <td><input type="checkbox"></td>
                                 <td>323</td>
                                 <td>Keagan Potgieter</td>
+                            </tr>
+                            <tr class="employee-row">
+                                <td><input type="checkbox"></td>
+                                <td>678</td>
+                                <td>John Doe</td>
+                            </tr>
+                            <tr class="employee-row">
+                                <td><input type="checkbox"></td>
+                                <td>567</td>
+                                <td>Jane Doe</td>
+                            </tr>
+                            <tr class="employee-row">
+                                <td><input type="checkbox"></td>
+                                <td>123</td>
+                                <td>Peter Potgieter</td>
                             </tr>
                             </tbody>
                         </table>
@@ -147,6 +110,57 @@
                             <label class="form-check-label fw-semibold" for="signOff">Sign Off</label>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 col-12 mb-4 mb-md-0">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title mb-3 text-primary fw-bold" style="letter-spacing:0.5px">ADDITIONAL OPTIONS</h5>
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold small">Fill-up Rule</label>
+                        <select class="form-select form-select-sm">
+                            <option>Daily Operations</option>
+                            <option>Alternate Rule</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold small">Ignore Days</label>
+                        <select class="form-select form-select-sm" multiple style="height:80px;">
+                            <option>Mon</option>
+                            <option>Tue</option>
+                            <option>Wed</option>
+                            <option>Thu</option>
+                            <option>Fri</option>
+                            <option>Sat</option>
+                            <option>Sun</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold small">Time Types</label>
+                        <select class="form-select form-select-sm" multiple style="height:80px;">
+                            <option>Hours Worked</option>
+                            <option>Leave Overtime</option>
+                            <option>Leave Unpaid</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold small">Report Fields</label>
+                        <select class="form-select form-select-sm" multiple style="height:80px;">
+                            <option>Shift Starts</option>
+                            <option>T&A In</option>
+                            <option>Act In</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold small">Extra Fields</label>
+                        <select class="form-select form-select-sm" multiple style="height:80px;">
+                            <option>Gender</option>
+                            <option>Badge number</option>
+                            <option>Job Code</option>
+                        </select>
+                    </div>
+                    <button class="btn btn-primary w-100 fw-bold">Generate Report</button>
                 </div>
             </div>
         </div>

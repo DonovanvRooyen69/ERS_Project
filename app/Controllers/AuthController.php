@@ -3,17 +3,12 @@ namespace App\Controllers;
 
 use App\Core\View;
 use App\Models\User;
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+
 class AuthController {
     public function showLoginForm() {
         if (session_status() == PHP_SESSION_NONE) {
             session_start();
         }
-
-        error_log("showLoginForm called. Session ID: " . session_id());
-        error_log("Error message: " . ($_SESSION['login_error'] ?? 'None'));
 
         View::render('auth/login.', [
             'error_message' => $_SESSION['login_error'] ?? null
@@ -27,8 +22,6 @@ class AuthController {
             session_start();
         }
 
-        error_log("Auth/login POST request received. Session ID: " . session_id());
-
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             $accountId = filter_input(INPUT_POST, 'account_id', FILTER_SANITIZE_NUMBER_INT);
@@ -36,8 +29,6 @@ class AuthController {
             $password = $_POST['password'];
 
             $error = '';
-
-            error_log("Login attempt - Account ID: " . $accountId . ", Username: " . $username);
 
             if (empty($accountId) || empty($username) || empty($password)) {
                 $error = "Please enter Account ID, Username, and Password.";
